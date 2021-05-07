@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+/**
+ * Observação:
+ *  A Busca Binária assume que o array já está
+ *  organizado quando inicia sua execução
+*/
+
 int buscaBinaria(int *V, int N, int elem) {
     int i, inicio, meio, final;
     inicio = 0;
