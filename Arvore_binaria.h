@@ -4,11 +4,11 @@
 /**
  * Estruturação de um nó
 */
-struct Node{
+typedef struct Node{
     int num;
     struct Node * R;
     struct Node * L;
-};
+}Node;
 /**
  * Ponteiro para o nó raiz
 */
