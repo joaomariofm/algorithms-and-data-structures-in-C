@@ -1,5 +1,2 @@
-#Ignorando o diretório build
-.build/
-#Ignorando o diretório de testes
-tests/
-aux/
+#Diretórios ignorados
+build/
