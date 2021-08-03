@@ -1,4 +1,4 @@
 #Ignorando o diretório build
 ./build/
 #Ignorando o diretório de testes
-./testing/
+./tests/
