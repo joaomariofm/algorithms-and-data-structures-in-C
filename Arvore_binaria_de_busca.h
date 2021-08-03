@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "Arvore_binaria.h"
 
+/**
+ * Inserção de nós em uma árvore binária de busca
+*/
 int insert_BinTree(BinTree* root, int value){
     if(root == NULL)
         return 0;
