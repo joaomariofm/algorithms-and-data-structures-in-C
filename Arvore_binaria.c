@@ -83,10 +83,50 @@ int total_nodes_BinTree(BinTree* root){
     return(L_height + R_height + 1);
 }
 
-int main(void) {
-    BinTree *root = newTree();
-
-    printf("%i\n", is_empty_BinTree(root));
-
-    return 0;
+/**
+ * Diferentes formas de percorrer a Árvore 
+*/
+/**
+ * Pré-Ordem
+*/
+void pre_order_BinTree(BinTree* root){
+    if(root == NULL)
+        return;
+    if(*root != NULL){
+        printf("%d\n",(*root)->num);
+        pre_order_BinTree(&((*root)->L));
+        pre_order_BinTree(&((*root)->R));
+    }
 }
+/**
+ * Em-Ordem
+*/
+void in_order_BinTree(BinTree* root){
+    if(root == NULL)
+        return;
+    if(*root != NULL){
+        in_order_BinTree(&((*root)->L));
+        printf("%d\n",(*root)->num);
+        in_order_BinTree(&((*root)->R));
+    }
+}
+/**
+ * Pós-Ordem
+*/
+void post_order_BinTree(BinTree* root){
+    if(root == NULL)
+        return;
+    if(*root != NULL){
+        post_order_BinTree(&((*root)->L));
+        printf("%d\n",(*root)->num);
+        post_order_BinTree(&((*root)->R));
+    }
+}
+
+/**
+ * A inserção de nós não foi explorada nessa implementação
+ * pois partimos do entendimento de que a inserção de nós 
+ * precisa seguir um método, como visto em árvores binárias
+ * de busca por exemplo, onde os valores menores que o nó 
+ * são inseridos a esquerda e os maiores a direita.
+*/
