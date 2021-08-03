@@ -123,6 +123,7 @@ void post_order_BinTree(BinTree* root){
     }
 }
 
+
 /**
  * A inserção de nós não foi explorada nessa implementação
  * pois partimos do entendimento de que a inserção de nós 
