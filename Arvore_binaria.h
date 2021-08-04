@@ -8,6 +8,7 @@ typedef struct Node{
     int num;
     struct Node * R;
     struct Node * L;
+    struct Node * parent;
 }Node;
 /**
  * Ponteiro para o nó raiz
