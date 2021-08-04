@@ -126,7 +126,7 @@ void post_order_BinTree(BinTree* root){
 
 
 /**
- * A inserção de nós não foi explorada nessa implementação
+ * A inserção de nós não foi explorada nesse arquivo
  * pois partimos do entendimento de que a inserção de nós 
  * precisa seguir um método, como visto em árvores binárias
  * de busca por exemplo, onde os valores menores que o nó 
