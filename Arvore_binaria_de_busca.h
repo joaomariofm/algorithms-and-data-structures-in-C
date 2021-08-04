@@ -5,7 +5,7 @@
 /**
  * Inserção de nós em uma árvore binária de busca
 */
-int insert_BinTree(BinTree* root, int value){
+int Tree_Insert(BinTree* root, int value){
     if(root == NULL)
         return 0;
     Node* new_node;
@@ -40,4 +40,36 @@ int insert_BinTree(BinTree* root, int value){
     }
 
     return 1;
+}
+
+/**
+ * Busca por uma chave específica dentro da árvore
+*/
+BinTree Tree_Search(BinTree current, int value){
+    while(current != NULL && value != current->num){
+        if(value < current->num)
+            current = current->L;
+        else
+            current = current->R;
+    }
+
+    return current;    
+}
+
+/**
+ * Busca pelo valor máximo
+*/
+BinTree Tree_Maximum(BinTree current){
+    while(current->R != NULL)
+        current = current->R;
+    return current;
+}
+
+/**
+ * Busca pelo valor mínimo
+*/
+BinTree Tree_Minumun(BinTree current){
+    while(current->L != NULL)
+        current = current->L;
+    return current;
 }
