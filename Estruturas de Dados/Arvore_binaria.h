@@ -119,8 +119,8 @@ void post_order_BinTree(BinTree* root){
         return;
     if(*root != NULL){
         post_order_BinTree(&((*root)->L));
-        printf("%d\n",(*root)->num);
         post_order_BinTree(&((*root)->R));
+        printf("%d\n",(*root)->num);
     }
 }
 
