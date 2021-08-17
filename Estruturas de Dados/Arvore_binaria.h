@@ -58,13 +58,11 @@ int is_empty_BinTree(BinTree* root){
 /**
  * Função que verifica a altura da árvore
 */
-int height_BinTree(BinTree* root){
+int height_BinTree(BinTree root){
     if(root == NULL)
         return 0;
-    if(*root == NULL)
-        return 0;
-    int L_height = height_BinTree(&((*root)->L));
-    int R_height = height_BinTree(&((*root)->R));
+    int L_height = height_BinTree(root->L);
+    int R_height = height_BinTree(root->R);
     if(L_height>R_height)
         return (L_height+1);
     else
@@ -122,6 +120,31 @@ void post_order_BinTree(BinTree* root){
         post_order_BinTree(&((*root)->R));
         printf("%d\n",(*root)->num);
     }
+}
+
+/**
+ * Por nível
+*/
+void printCurrentLevel(BinTree root, int level)
+{
+
+    if (root == NULL)
+        return;
+    if (level == 1){
+        printf("%d\n", root->num);
+    }
+    else if (level > 1)
+    {
+        printCurrentLevel(root->L, level-1);
+        printCurrentLevel(root->R, level-1);
+    }
+}
+
+void breadth_first_search(BinTree root){
+    int h = height_BinTree(root);
+    int i;
+    for (i=1; i<=h; i++)
+        printCurrentLevel(root, i);
 }
 
 
