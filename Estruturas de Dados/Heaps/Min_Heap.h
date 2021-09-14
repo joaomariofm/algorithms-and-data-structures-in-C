@@ -1,179 +1,160 @@
+#include <malloc.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#define true 1
+#define false 0
 
-typedef int key_type;
-typedef struct _minheap* minheap;
+typedef struct {
+  int * A;
+  int tamanhoAtual;
+  int tamanhoMaximo;
+} HEAP;
 
-minheap minheap_create();
-minheap minheap_heapify(const key_type* array, int n);
-void minheap_destroy(minheap);
-int minheap_findmin(minheap);
-void minheap_insert(minheap, key_type);
-void minheap_deletemin(minheap);
-int minheap_is_empty(minheap);
-int minheap_size(minheap);
-void minheap_clear(minheap);
-
-struct _minheap {
-    key_type* array;
-    int max_size;
-    int cur_size;
-};
-
-minheap minheap_create() {
-    minheap h = (minheap) malloc(sizeof(struct _minheap));
-
-    if (h == NULL) {
-        fprintf(stderr, "Not enough memory!\n");
-        abort();
-    }
-
-    h->max_size = 64;   
-    h->cur_size = 0;
-    h->array = (key_type*) malloc(sizeof(key_type)*(h->max_size+1));
-
-    if (h->array == NULL) {
-        fprintf(stderr, "Not enough memory!\n");
-        abort();
-    }
-    return h;
+void inicializarHeap(HEAP * h, int tamanhoMax){
+  h->A = (int*) malloc(sizeof(int)*(tamanhoMax+1));
+  h->tamanhoAtual = 0;
+  h->tamanhoMaximo = tamanhoMax;
 }
 
-void minheap_destroy(minheap h) {
-    assert(h);
-    free(h->array);
-    free(h);
+void destruirHeap(HEAP * h){
+  int tamanho = h->tamanhoMaximo;
+  free(h->A);
+  h->tamanhoMaximo=0;
+  h->tamanhoAtual=0;
 }
 
-static void minheap_double_capacity(minheap h) {
-    // create double the array
-    int new_max_size = 2 * h->max_size;
-    key_type* new_array = (key_type*) malloc(sizeof(key_type)*(new_max_size+1));
-
-    if (new_array == NULL) {
-        fprintf(stderr, "Not enough memory!\n");
-        abort();
-    }
-
-    /* copy old elements to new array */
-    for(int i = 1; i <= h->cur_size; i++) {
-        new_array[i] = h->array[i];
-    }
-
-    /* free old array and place new in position */
-    free(h->array);
-    h->array = new_array;
-    h->max_size = new_max_size;
+int pai(int i){
+  return (i-1)/2;
 }
 
-static void minheap_swap(minheap h, int i, int j) {
-    assert (h && i >=1 && i <= h->cur_size && j >= 1 && j <= h->cur_size);
-    key_type tmp = h->array[i];
-    h->array[i] = h->array[j];
-    h->array[j] = tmp;
+int filhoEsquerda(int i){
+  return 2*i + 1;
 }
 
-static void minheap_fixup(minheap h, int k) {
-    assert(h && k >= 1 && k <= h->cur_size);
-    while (k>1 && h->array[k] < h->array[k/2]) {
-        minheap_swap(h, k/2, k);
-        k = 2;
+int filhoDireita(int i){
+  return 2*i + 2;
+}
+
+void ReHeapUp(HEAP* h, int i) {
+    int temp;
+
+    while( i > 0 && h->A[i] < h->A[pai(i)]){
+        temp = h->A[i];
+
+        h->A[i] = h->A[pai(i)];
+        h->A[pai(i)] = temp;
+        i = pai(i);
     }
 }
 
-static void minheap_fixdown(minheap h, int k) {
-    assert(h);
-    while (2*k <= h->cur_size) {
-        int j = 2*k;
-        if (j < h->cur_size && h->array[j+1] < h->array[j])
-            j++;
-        if (h->array[k] <= h->array[j])
+void Insert(HEAP* h, int valor) {
+    h->A[h->tamanhoAtual] = valor;
+
+    ReHeapUp(h,h->tamanhoAtual);
+    (h->tamanhoAtual)++;
+}
+
+void ReHeapDown(HEAP* h,int i){
+    int temp;
+    int j;
+
+    while(2*i + 1 < h->tamanhoAtual){
+        j = 2*i + 1;
+
+        if(j+1 < h->tamanhoAtual && h->A[j + 1] < h->A[j])
+            j = j + 1;
+
+        if(h->A[i] < h->A[j])
             break;
+        else {
+            temp = h->A[i];
+            h->A[i] = h->A[j];
+            h->A[j] = temp;
 
-        minheap_swap(h, k, j);
-        k = j;
+            i = j;
+        }
     }
 }
 
-minheap minheap_heapify(const key_type* array, int n) {
-    assert(array && n > 0);
-    minheap h = (minheap) malloc(sizeof(struct _minheap));
+void Delete_MaxVal(HEAP* h){
+    int temp;
 
-    if (h == NULL) {
-        fprintf(stderr, "Not enough memory!\n");
-        abort();
-    }
+    temp = h->A[0];
+    h->A[0] = h->A[h->tamanhoAtual -1];
+    h->A[h->tamanhoAtual -1] = temp;
 
-    h->max_size = n;
-    h->cur_size = 0;
-    h->array = (key_type*) malloc(sizeof(key_type)*(h->max_size+1));
+    (h->tamanhoAtual)--;
+    ReHeapDown(h,0);
+}
 
-    if (h->array == NULL) {
-        fprintf(stderr, "Not enough memory!\n");
-        abort();
-    }
+HEAP* Heapfy(int* A,int n){
+    HEAP* h = (HEAP*)malloc(sizeof(HEAP));
+    inicializarHeap(h,n);
+    h->A = A;
+    h->tamanhoAtual = n;
+    h->tamanhoMaximo = n;
 
-    h->cur_size = n;
-
-    for(int k = 0; k < n; k++)
-        h->array[k+1] = array[k];
-
-    for(int k = (h->max_size+1)/2; k > 0; k--)
-        minheap_fixdown(h, k);
+    int i;
+    for(i = (n-1)/2 ; i >= 0 ; i--)
+        ReHeapDown(h,i);
 
     return h;
 }
 
-void minheap_insert(minheap h, key_type key) {
-    assert(h);
-    // make sure there is space
-    if (h->cur_size == h->max_size)
-        minheap_double_capacity(h);
+void HeapSort(int* A, int n){
+    HEAP *h = Heapfy(A,n);
 
-    // add at the bottom, as a leaf
-    h->array[++h->cur_size] = key;
+    int i;
+    int temp;
 
-    // fix its position
-    minheap_fixup(h, h->cur_size);
-}
+    int original_size = h->tamanhoAtual;
 
-int minheap_findmin(minheap h) {
-    if (minheap_is_empty(h)) {
-        fprintf(stderr, "Heap is empty!\n");
-        abort();
+    for(i = (h->tamanhoAtual - 1) ; i >= 1 ; i--){
+
+        temp = h->A[0];
+        h->A[0] = h->A[i];
+        h->A[i] = temp;
+
+        h->tamanhoAtual--;
+
+        ReHeapDown(h,0);
     }
 
-    // min is always in first position
-    return h->array[1];
-}   
+    h->tamanhoAtual = original_size;
+}
 
-void minheap_deletemin(minheap h) {
-    if (minheap_is_empty(h)) {
-        fprintf(stderr, "Heap is empty!\n");
-        abort();
+// Imprime o arranjo (na ordem que estiver)
+void imprimirHeapArray(HEAP h){
+  int tamanho = h.tamanhoAtual;
+  int i;
+  for (i=0;i<tamanho;i++) printf("%d ",h.A[i]);
+  printf("\n");
+}
+
+void imprimirArray(int* A,int n){
+    int i;
+    
+    for(i = 0 ; i<n ; i++){
+        printf("%d ",A[i]);
     }
-    // swap first with last
-    minheap_swap(h, 1, h->cur_size);
-
-    // delete last
-    h->cur_size--;
-
-    // fixdown first
-    minheap_fixdown(h, 1);
-}   
-
-int minheap_size(minheap h) {
-    assert(h);
-    return h->cur_size;
+        
+    printf("\n");
 }
 
-int minheap_is_empty(minheap h) {
-    assert(h);
-    return h->cur_size <= 0;
+int percursoPreOrdem(HEAP* h, int atual){
+  if (atual < h->tamanhoAtual){
+    printf("%i ", h->A[atual]);
+    percursoPreOrdem(h, filhoEsquerda(atual));
+    percursoPreOrdem(h, filhoDireita(atual));
+  }
 }
 
-void minheap_clear(minheap h) {
-    assert(h);
-    h->cur_size = 0;
+int alturaHeap(HEAP* h){
+  int altura = -1;
+  int i = 1;
+  while (i <= h->tamanhoAtual){
+    i = filhoEsquerda(i);
+    altura++;
+  }
+  return altura;
 }
+
