@@ -34,8 +34,6 @@ int filhoDireita(int i){
   return 2*i + 2;
 }
 
-
-
 void ReHeapUp(HEAP* h, int i) {
     int temp;
 
