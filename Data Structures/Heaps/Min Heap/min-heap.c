@@ -1,13 +1,9 @@
 #include <malloc.h>
 #include <stdio.h>
+#include "./min-heap.h"
+
 #define true 1
 #define false 0
-
-typedef struct {
-  int * A;
-  int tamanhoAtual;
-  int tamanhoMaximo;
-} HEAP;
 
 void inicializarHeap(HEAP * h, int tamanhoMax){
   h->A = (int*) malloc(sizeof(int)*(tamanhoMax+1));
@@ -37,7 +33,7 @@ int filhoDireita(int i){
 void ReHeapUp(HEAP* h, int i) {
     int temp;
 
-    while( i > 0 && h->A[i] > h->A[pai(i)]){
+    while( i > 0 && h->A[i] < h->A[pai(i)]){
         temp = h->A[i];
 
         h->A[i] = h->A[pai(i)];
@@ -60,10 +56,10 @@ void ReHeapDown(HEAP* h,int i){
     while(2*i + 1 < h->tamanhoAtual){
         j = 2*i + 1;
 
-        if(j+1 < h->tamanhoAtual && h->A[j + 1] > h->A[j])
+        if(j+1 < h->tamanhoAtual && h->A[j + 1] < h->A[j])
             j = j + 1;
 
-        if(h->A[i] > h->A[j])
+        if(h->A[i] < h->A[j])
             break;
         else {
             temp = h->A[i];
