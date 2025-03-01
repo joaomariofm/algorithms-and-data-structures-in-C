@@ -24,14 +24,14 @@ void show(LIST* lista) {
 
 	POINTER end = lista->init;
 
-	printf("Lista: \" ");
+	printf("Lista: \"");
 
-	while(end != NULL) {
-		printf("%i ", end->record.key);
+	do {
+		printf("%i, ", end->record.key);
 		end = end->next;
-	}
+	} while(end->next != NULL);
 
-	printf("\"\n");
+	printf("%i\"\n", end->record.key);
 }
 
 POINTER sequentialSearch(LIST* lista, KEY key) {

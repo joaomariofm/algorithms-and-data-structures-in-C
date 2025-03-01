@@ -1,4 +1,4 @@
-#include "linked-list.h"
+#include "ordered-linked-list.h"
 
 int main(void) {
 
@@ -14,10 +14,14 @@ int main(void) {
 
 	RECORD reg3;
 	reg3.key = 3;
+
+  RECORD reg4;
+	reg4.key = 42;
 	
 	insertElement(&minhaListaLigada, reg1);
 	insertElement(&minhaListaLigada, reg2);
 	insertElement(&minhaListaLigada, reg3);
+	insertElement(&minhaListaLigada, reg4);
 
 	show(&minhaListaLigada);
 }
