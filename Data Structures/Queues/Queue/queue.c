@@ -1,23 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int TIPOCHAVE;
-
-typedef struct {
-    TIPOCHAVE chave;
-    //outros campos
-} REGISTRO;
-
-typedef struct aux {
-    REGISTRO reg;
-    struct aux* prox;
-} ELEMENTO, *PONT;
-
-typedef struct {
-    PONT inicio;
-    PONT fim;
-} FILA;
-
 void inicializarFila(FILA* f){
     f->inicio = NULL;
     f->fim = NULL;
