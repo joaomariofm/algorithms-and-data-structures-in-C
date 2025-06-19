@@ -1,9 +1,9 @@
 #include "./binary-search.h"
 
-int binarySearch(int *array, int n, int x)
+int binarySearch(int *array, int arraySize, int x)
 {
   int low = 0;
-  int high = n - 1;
+  int high = arraySize - 1;
 
   while(low <= high)
   {
