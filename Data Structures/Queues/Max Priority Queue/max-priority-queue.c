@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Heaps/Max_Heap.h"
+#include "../../Heaps/Max Heap/max-heap.h"
 
 int HeapMax(int* A){
     return A[0];

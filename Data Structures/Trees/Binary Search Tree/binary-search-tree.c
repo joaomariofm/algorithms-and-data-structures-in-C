@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Arvore_binaria.h"
+#include "binary-search-tree.h"
 
 /**
  * Busca por uma chave específica dentro da árvore
