@@ -1,15 +1,11 @@
 #include "./linear-search.h"
 
-int linearSearch(int *V, int N, int elem)
+int linearSearch(int *array, int arraySize, int x)
 {
-    int i;
+  for(int i = 0; i<arraySize; i++)
+    if(array[i] == x)
+      return i;
 
-    for(i = 0; i<N; i++)
-    {
-        if(elem == V[i])
-            return i;
-    }
-
-    return -1;
+  return -1;
 }
 

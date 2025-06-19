@@ -5,5 +5,5 @@
  * searched array is previously ordered
 */
 
-int linearSearch(int *V, int N, int elem);
+int linearSearch(int *array, int arraySize, int x);
 
