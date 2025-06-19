@@ -1,24 +1,24 @@
 #include "./binary-search.h"
 
-int binarySearch(int *V, int N, int elem)
+int binarySearch(int *array, int n, int x)
 {
-    int beginning = 0;
-    int end = N - 1;
-    int middle;
+  int low = 0;
+  int high = n - 1;
 
-    while(beginning <= end)
-    {
-        middle = (beginning + end)/2;
+  while(low <= high)
+  {
+    int mid = low + (high - low) / 2;
 
-        if(elem < V[middle])
-            end = middle - 1;
-        else   
-            if(elem > V[middle])
-                beginning = middle + 1;
-            else    
-                return middle;
-    }
+    if (array[mid] == x)
+      return mid;
 
-    return -1;
+    if (array[mid] < x)
+      low = mid + 1;
+
+    else
+      high = mid - 1;
+  }
+
+  return -1;
 }
 

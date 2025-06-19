@@ -5,5 +5,5 @@
  * searched array is previously ordered
 */
 
-int binarySearch(int *V, int N, int elem);
+int binarySearch(int *array, int N, int x);
 
