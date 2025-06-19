@@ -6,8 +6,8 @@ int linearSearch(int *V, int N, int elem)
     {
         if(elem == V[i])
             return i;
-
-        return -1;
     }
+
+    return -1;
 }
 
