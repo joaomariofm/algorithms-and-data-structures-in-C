@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /**
  * Observação:
  *  A Busca Binária assume que o array já está

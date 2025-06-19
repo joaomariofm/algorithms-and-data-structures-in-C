@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int buscaLinear(int *V, int N, int elem) {
     int i;
     for(i = 0 ; i<N ; i++) {

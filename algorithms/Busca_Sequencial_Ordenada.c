@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /**
  * Observação:
  *  A Busca Sequencial Ordenada assime que o
