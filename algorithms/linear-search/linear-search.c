@@ -1,3 +1,5 @@
+#include "./linear-search.h"
+
 int linearSearch(int *V, int N, int elem)
 {
     int i;

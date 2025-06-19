@@ -1,9 +1,4 @@
-/**
- * Note:
- *
- * The Binary Search assumes that the 
- * searched array is previously ordered
-*/
+#include "./binary-search.h"
 
 int binarySearch(int *V, int N, int elem)
 {
