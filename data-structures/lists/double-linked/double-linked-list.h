@@ -1,3 +1,6 @@
+#ifndef DOUBLE_LINKED_LIST_H
+#define DOUBLE_LINKED_LIST_H
+
 typedef int KEY;
 
 typedef struct
@@ -21,8 +24,6 @@ typedef struct
 
 // Query operations
 
-POINTER search(LIST *list, KEY key);
-
 // POINTER min(LIST *list);
 
 // POINTER max(LIST *list);
@@ -40,3 +41,5 @@ void reset(LIST* list);
 void insert(LIST *list, POINTER element);
 
 void discard(LIST *list, POINTER element);
+
+#endif

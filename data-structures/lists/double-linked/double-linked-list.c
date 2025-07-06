@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./double-linked-list.h"
+#include "../../../algorithms/linear-search/list/linear-search.h"
 
 // Query operations
 
 POINTER prev(LIST *list, POINTER element)
 {
-  POINTER found_element = search(list, element->record.key);
+  POINTER found_element = linearSearch(list, element->record.key);
 
   return found_element->prev;
 }
 
 POINTER next(LIST *list, POINTER element)
 {
-  POINTER found_element = search(list, element->record.key);
+  POINTER found_element = linearSearch(list, element->record.key);
 
   return found_element->next;
 }
