@@ -24,9 +24,9 @@ typedef struct
 
 // Query operations
 
-// POINTER min(LIST *list);
+POINTER min(LIST *list);
 
-// POINTER max(LIST *list);
+POINTER max(LIST *list);
 
 POINTER next(LIST *list, POINTER element);
 
@@ -43,3 +43,4 @@ void insert(LIST *list, POINTER element);
 void discard(LIST *list, POINTER element);
 
 #endif
+

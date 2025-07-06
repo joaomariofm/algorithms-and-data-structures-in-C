@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./double-linked-list.h"
-#include "../../../algorithms/linear-search/list/linear-search.h"
+#include "../double-linked-list.h"
+#include "../../../../algorithms//linear-search/list/linear-search.h"
 
 // Query operations
 

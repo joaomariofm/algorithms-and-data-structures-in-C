@@ -39,7 +39,7 @@ int main (void)
 
   init(&list);
 
-  ELEMENT element_1 = createElement(2);
+  ELEMENT element_1 = createElement(10);
   ELEMENT element_2 = createElement(4);
   ELEMENT element_3 = createElement(1);
   ELEMENT element_4 = createElement(8);
@@ -47,6 +47,8 @@ int main (void)
   ELEMENT element_6 = createElement(5);
   ELEMENT element_7 = createElement(6);
   ELEMENT element_8 = createElement(7);
+  ELEMENT element_9 = createElement(9);
+  ELEMENT element_10 = createElement(2);
 
   insert(&list, &element_1);
   insert(&list, &element_2);
@@ -56,6 +58,8 @@ int main (void)
   insert(&list, &element_6);
   insert(&list, &element_7);
   insert(&list, &element_8);
+  insert(&list, &element_9);
+  insert(&list, &element_10);
 
   show(&list);
 
